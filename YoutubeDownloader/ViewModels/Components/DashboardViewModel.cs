@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using Gress;
 using Gress.Completable;
 using Stylet;
@@ -55,7 +56,11 @@ public class DashboardViewModel : PropertyChangedBase
     }
 
     public bool CanShowSettings => !IsBusy;
-
+    public void PasteButtonPressed()
+    {
+        Query = Clipboard.GetText();
+        ProcessQuery();
+    }
     public async void ShowSettings() => await _dialogManager.ShowDialogAsync(
         _viewModelFactory.CreateSettingsViewModel()
     );
